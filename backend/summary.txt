@@ -1,2 +1,5 @@
 npx prisma init
 npx prisma generate
+npx prisma migrate dev
+    ->   ? Enter a name for the new migration: » usermodel added
+npx prisma db push 

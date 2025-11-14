@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import authRoutes from "./router/auth.routes.js"
 
 dotenv.config(
     {
@@ -20,8 +21,12 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+app.get("/", (req, res) => {
+    res.send("hello i am sandeep suthar🔥");
+})
 
 
+app.use("/api/v1/auth", authRoutes)
 
 app.listen(PORT, () => {
     console.log(`Backend is listening at port${PORT}`);
