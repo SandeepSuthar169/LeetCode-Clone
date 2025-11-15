@@ -1,34 +1,19 @@
-import express from "express"
+import mongoose from "mongoose";
+import db from "./db/index.js";
+import app from "./app.js"
 import dotenv from "dotenv"
-import cookieParser from "cookie-parser"
-import cors from "cors"
-import authRoutes from "./router/auth.routes.js"
 
-dotenv.config(
-    {
-        path: "./.env"
-    }
-)
-
-const app = express()
-const PORT = process.env.PORT   || 8080
-
-
-app.use(cookieParser)
-app.use(cors({
-    origin: "http://localhost:5173"
-}))
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
-app.get("/", (req, res) => {
-    res.send("hello i am sandeep suthar🔥");
+dotenv.config({
+    path: "./.env"
 })
 
+const PORT = process.env.PORT || 8080
 
-app.use("/api/v1/auth", authRoutes)
-
-app.listen(PORT, () => {
-    console.log(`Backend is listening at port${PORT}`);
+db()
+    .then(() => {
+        app.listen(PORT, () => console.log(`Server listen on Port:, ${PORT}`))
+}).catch((error) => {
+    console.error(`Server listen error: ${error}`);
+    process.exit(1)
     
 })
