@@ -1,7 +1,9 @@
-import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import mongoose, { Schema } from "mongoose";
+import { AvailableUserRoles, UserRoleEnum } from "../utils/constants.js";
+
 
 const userSchema = new Schema(
     {
@@ -19,21 +21,19 @@ const userSchema = new Schema(
                 lowercase: true,
                 trim: true
             },
+            role: {
+                type: String,
+                enum: AvailableUserRoles,
+                default: UserRoleEnum.USER
+            },
             password: {
                 type: String,
                 required: true
             },
-         
-            // phone: {
-            //     type: Number,
-            //     required: true,
-            //     unique: true,
-            //     trim: true
-            // },
             isEmailVerified: {
-                type: Boolean,
+                type: String,
                 required: true,
-                default: false
+                default: true
             },
             refreshToken: {
                 type: String,
@@ -50,6 +50,22 @@ const userSchema = new Schema(
             emailVerificationExpiry: {
                 type: Date,
             },
+            problems: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Problem" 
+            }],
+            submission: [{ 
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: "Submission" 
+            }],
+            problemSolved: [{ 
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: "ProblemSolved" 
+            }],
+            playlists: [{ 
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: "Playlist" 
+            }],
         },
     {
         timestamps: true
