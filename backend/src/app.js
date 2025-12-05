@@ -7,7 +7,7 @@ import authRoute from "./routes/auth.routes.js"
 const app = express()
 
 app.use(cors({
-    origin: process.env.BASE_URL,
+    origin: process.env.BASE_URL || `http://localhost:8000`,
     credentials: true,
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
     allowedHeaders: ['Content-Type', "Authorization"]
