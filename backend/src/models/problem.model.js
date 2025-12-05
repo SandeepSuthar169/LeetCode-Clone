@@ -4,6 +4,10 @@ import { AvailableDifficulty, DifficultyEnum } from "../utils/constants.js";
 
 const problemSchema = new Schema(
     {
+        _id:{
+            type: String,
+            default: () => new mongoose.Types.ObjectId().toString()
+        },
         title: {
             type: String,
             required: true,
@@ -44,15 +48,19 @@ const problemSchema = new Schema(
         },
         testcases: {
             type: Schema.Types.Mixed,
-            required: true
+            required: true,
+            default: null
+
         },
         codeSnippets: {
             type: Schema.Types.Mixed,
-            required: true
+            required: true,
+            default: null
         },
         refrenseSolution: {
             type: Schema.Types.Mixed,
-            required: true
+            required: true,
+            default: null
         },
         createdAt: {
             type: Date,
@@ -77,7 +85,10 @@ const problemSchema = new Schema(
         },
     },
     {
-        timestamps: true
+        timestamps: {
+            createdAt: 'createdAt',
+            updatedAt: 'updatedAt'
+        }
     }
 )
 

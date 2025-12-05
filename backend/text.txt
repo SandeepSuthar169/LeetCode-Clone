@@ -1,0 +1,38 @@
+openssl rand -hex 32 -> this for generate token using JWT
+password in wsl or ubantu :-> my_cast
+
+
+
+sudo apt update
+sudo nano /etc/
+sudo nano /etc/default.grub
+sudo apt install  -y docker.io
+sudo apt install -y docker-compose
+wget https://github.com/judge0/judge0/releases/download/v1.13.1/judge0-v1.13.1.zip
+
+
+# Go to home directory
+cd ~
+
+# Install wget if needed
+sudo apt install wget unzip -y
+
+# Download Judge0
+wget https://github.com/judge0/judge0/releases/download/v1.13.1/judge0-v1.13.1.zip
+
+# Unzip
+unzip judge0-v1.13.1.zip
+
+# Go into the directory
+cd judge0-v1.13.1
+
+
+ls
+docker-compose.yml  judge0.conf
+
+
+cd judge0-v1.13.1
+ande@dellg15:~/judge0-v1.13.1$ ls
+docker-compose.yml  judge0.conf
+
+docker-compose up -d db redis
