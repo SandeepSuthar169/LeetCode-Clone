@@ -90,4 +90,4 @@ const problemSchema = new Schema(
 )
 
 
-export const problem = mongoose.model("problem", problemSchema)
+export const Problem = mongoose.model("problem", problemSchema)
