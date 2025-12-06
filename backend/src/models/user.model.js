@@ -35,9 +35,9 @@ const userSchema = new Schema(
                 required: true
             },
             isEmailVerified: {
-                type: String,
+                type: Boolean,
                 required: true,
-                default: true
+                default: false
             },
             refreshToken: {
                 type: String,
@@ -62,7 +62,7 @@ const userSchema = new Schema(
                 type: mongoose.Schema.Types.ObjectId, 
                 ref: "Submission" 
             }],
-            problemSolved: [{ 
+            problemsSolved: [{ 
                 type: mongoose.Schema.Types.ObjectId, 
                 ref: "ProblemSolved" 
             }],
@@ -70,19 +70,12 @@ const userSchema = new Schema(
                 type: mongoose.Schema.Types.ObjectId, 
                 ref: "Playlist" 
             }],
-            createdAt: {
-                type: Date,
-                default: Date.now
-            },
-            updatedAt: {
-                type: Date,
-                default: Date.now
-            }
+           
         },
     {
         timestamps: {
             createdAt: 'createdAt',
-            updatedAt: 'updateAt'
+            updatedAt: 'updatedAt'
         }
     }
 )
@@ -103,10 +96,11 @@ userSchema.methods.generateAccessToken =  function () {
         {
             _id: this._id,
             email: this.email,
-            username: this.username
+            username: this.username,
+            role: this.role
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: process.env.ACCESS_TOKEN_EXPRIRY },
+        { expiresIn: process.env.ACCESS_TOKEN_EXPIRY },
     )
 }
 
@@ -118,11 +112,11 @@ userSchema.methods.generateRefreshToken =  function () {
             username: this.username
         },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: process.env.REFRESH_TOKEN_EXPRIRY },
+        { expiresIn: process.env.REFRESH_TOKEN_EXPIRY },
     )
 }
 
-userSchema.methods.generateTemporyToken = function(){
+userSchema.methods.generateTemporaryToken = function(){
     const unHashedToken = crypto.randomBytes(20).toString("hex")
 
     const hashedToken = crypto.createHash("sha256").update(unHashedToken).digest("hex")

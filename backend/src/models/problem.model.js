@@ -1,5 +1,8 @@
 import mongoose, { Schema } from "mongoose";
-import { AvailableDifficulty, DifficultyEnum } from "../utils/constants.js";
+import {
+     AvailableDifficulty, 
+     DifficultyEnum 
+}from "../utils/constants.js";
 
 
 const problemSchema = new Schema(
@@ -22,18 +25,22 @@ const problemSchema = new Schema(
             enum: AvailableDifficulty,
             default: DifficultyEnum.EASY
         },
-        tags: [{type: [String]}],
+        tags: {
+            type: [String],
+            default: []
+        },
         user: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true
         },
-        examples: {
+        examples: [{
             type: Object,
             required: true
-        },
+        }],
         constraints: {
-            type: String,
+            type: [String],
+            default: [],
             required: true
         },
         hints: {
@@ -54,18 +61,10 @@ const problemSchema = new Schema(
             required: true,
             default: null
         },
-        refrenseSolution: {
+        referenceSolution: {
             type: Schema.Types.Mixed,
             required: true,
             default: null
-        },
-        createdAt: {
-            type: Date,
-            default: true
-        },
-        updatedAt: {
-            type: Date,
-            default: true
         },
         submission: { 
             type: mongoose.Schema.Types.ObjectId, 
@@ -90,4 +89,4 @@ const problemSchema = new Schema(
 )
 
 
-export const Problem = mongoose.model("problem", problemSchema)
+export const Problem = mongoose.model("Problem", problemSchema)
