@@ -70,9 +70,20 @@ const userSchema = new Schema(
                 type: mongoose.Schema.Types.ObjectId, 
                 ref: "Playlist" 
             }],
+            createdAt: {
+                type: Date,
+                default: Date.now
+            },
+            updatedAt: {
+                type: Date,
+                default: Date.now
+            }
         },
     {
-        timestamps: true
+        timestamps: {
+            createdAt: 'createdAt',
+            updatedAt: 'updateAt'
+        }
     }
 )
 

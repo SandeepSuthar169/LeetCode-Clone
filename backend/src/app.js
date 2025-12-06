@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import cookieparser from "cookie-parser"
 import authRoute from "./routes/auth.routes.js"
+import problemRoutes from "./routes/problem.routes.js"
 
 
 const app = express()
@@ -21,6 +22,7 @@ app.use(express.urlencoded(
 ))
 
 app.use("/api/v1/auth", authRoute)
+app.use("/api/v1/problem", problemRoutes)
 
 
 export default app

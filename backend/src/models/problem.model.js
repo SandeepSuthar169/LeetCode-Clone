@@ -22,10 +22,7 @@ const problemSchema = new Schema(
             enum: AvailableDifficulty,
             default: DifficultyEnum.EASY
         },
-        tags: {
-            type: [String],
-            default: []
-        },
+        tags: [{type: [String]}],
         user: {
             type: Schema.Types.ObjectId,
             ref: "User",

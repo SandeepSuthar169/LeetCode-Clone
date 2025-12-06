@@ -36,3 +36,23 @@ ande@dellg15:~/judge0-v1.13.1$ ls
 docker-compose.yml  judge0.conf
 
 docker-compose up -d db redis
+
+
+wget https://github.com/judge0/judge0/releases/download/v1.13.1/judge0-v1.13.1.zip
+unzip judge0-v1.13.1.zip 
+
+ande@dellg15:/mnt/s$ cd judge0-v1.13.1
+
+nano  judge0.conf
+
+REDIS_PASSWORD=set a random password
+
+Default: NO DEFAULT, YOU MUST SET YOUR PASSWORD
+POSTGRES_PASSWORD=
+
+
+cd judge0-v1.13.1
+docker-compose up -d db redis
+sleep 10s
+docker-compose up -d
+sleep 5s
